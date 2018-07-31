@@ -505,15 +505,15 @@ int daemon_init(void)
 
 	umask(0); /* clear file mode creation mask */
 
-	close(0); /* close stdin */
-	close(1); /* close stdout */
+	close(STDIN_FILENO); /* close stdin */
+	close(STDOUT_FILENO); /* close stdout */
 	
-	close(2); /* close stderr */
+	close(STDERR_FILENO); /* close stderr */
 	
 	int fd = open( "/dev/null", O_RDWR );
-	dup2( fd, 0 );
-	dup2( fd, 1 );
-	dup2( fd, 2 );
+	dup2( fd, STDIN_FILENO );
+	dup2( fd, STDOUT_FILENO );
+	dup2( fd, STDERR_FILENO );
 	if ( fd > 2 ){
 		close( fd );
 	}
