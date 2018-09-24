@@ -374,6 +374,9 @@ bool check_out(int solution_id, int result) {
 		return _check_out_mysql(solution_id, result);
 
 }
+/*
+
+*/
 int work() {
 //      char buf[1024];
 	static int retcnt = 0;
@@ -383,7 +386,6 @@ int work() {
 	int runid = 0;
 	int jobs[max_running * 2 + 1];
 	pid_t tmp_pid = 0;
-
 	//for(i=0;i<max_running;i++){
 	//      ID[i]=0;
 	//}
@@ -486,6 +488,12 @@ int already_running() {
 	write(fd, buf, strlen(buf) + 1);
 	return (0);
 }
+/*
+
+创建一个守护进程
+标准守护进程的创建方式
+
+*/
 int daemon_init(void)
 
 {
