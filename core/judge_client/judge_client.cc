@@ -119,8 +119,8 @@ static int use_ptrace = 1;
 #define ZOJ_COM
 MYSQL *conn;
 
-static char lang_ext[17][8] = { "c", "cc", "pas", "java", "rb", "sh", "py",
-		"php", "pl", "cs", "m", "bas", "scm","c","cc","lua","js" };
+static char lang_ext[18][8] = { "c", "cc", "pas", "java", "rb", "sh", "py",
+		"php", "pl", "cs", "m", "bas", "scm","c","cc","lua","js","go" };
 //static char buf[BUFFER_SIZE];
 int data_list_has(char * file){
    for(int i=0;i<data_list_len;i++){
@@ -237,6 +237,9 @@ void init_syscalls_limits(int lang) {
 	} else if (lang == 16) { //JS24
 		for (i = 0; i==0||LANG_JSV[i]; i++)
 			call_counter[LANG_JSV[i]] = HOJ_MAX_LIMIT;
+	} else if (lang == 17) {
+		for (i = 0; i == 0 || LANG_GO[i]; i++)
+			call_counter[LANG_GO[i] = HOJ_MAX_LIMIT];
 	}
 
 }
@@ -882,6 +885,7 @@ int compile(int lang,char * work_dir) {
 	         		"-lm", "--static", "-std=c++0x",  "-DONLINE_JUDGE", NULL };
 	const char * CP_LUA[] = { "luac","-o","Main", "Main.lua", NULL };
 	const char * CP_JS[] = { "js24","-c", "Main.js", NULL };
+	const char * CP_GO[] = {"go","build","Main.go",NULL};
 
 	char javac_buf[7][32];
 	char *CP_J[7];
@@ -988,6 +992,8 @@ int compile(int lang,char * work_dir) {
 		case 16:
 			execvp(CP_JS[0], (char * const *) CP_JS);
 			break;
+		case 17:
+			execvp(CP_GO[0], (char * const *)CP_GO);
 		default:
 			printf("nothing to do!\n");
 		}
@@ -1638,6 +1644,8 @@ void run_solution(int & lang, char * work_dir, int & time_lmt, int & usedtime,
 	case 16: //SpiderMonkey
 		execl("/js24", "/js24", "Main.js", (char *) NULL);
 		break;
+	case 17:
+		execl("./Main","./Main",(char *)NULL)
 
 	}
 	//sleep(1);

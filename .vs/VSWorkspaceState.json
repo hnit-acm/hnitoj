@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\core",
+    "\\core\\judged",
+    "\\core\\judge_client",
+    "\\core\\judge_src"
   ],
-  "SelectedNode": "\\core",
+  "SelectedNode": "\\core\\judge_src\\judged.cc",
   "PreviewInSolutionExplorer": false
 }
